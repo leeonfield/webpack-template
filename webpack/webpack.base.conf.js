@@ -2,7 +2,7 @@ const path = require("path");
 const resolve = (dir) => path.resolve(__dirname, "../", dir);
 
 module.exports = {
-  entry: "./client/index.js",
+  entry: "./src/index.js",
   optimization: {
     splitChunks: {
       chunks: "initial",

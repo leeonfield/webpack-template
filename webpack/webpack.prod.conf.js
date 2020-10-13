@@ -1,29 +1,29 @@
-process.env.NODE_ENV = "production";
-const path = require("path");
-const webpack = require("webpack");
-const merge = require("webpack-merge");
-const TerserJSPlugin = require("terser-webpack-plugin");
-const baseWebpackConfig = require("./webpack.base.conf");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CompressionPlugin = require("compression-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
+process.env.NODE_ENV = 'production'
+const path = require('path')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const TerserJSPlugin = require('terser-webpack-plugin')
+const baseWebpackConfig = require('./webpack.base.conf')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 // .BundleAnalyzerPlugin
-const resolve = (dir) => path.resolve(__dirname, "../", dir);
+const resolve = dir => path.resolve(__dirname, '../', dir)
 
 const prodWebpackConfig = merge(baseWebpackConfig, {
-  mode: "production",
+  mode: 'production',
   output: {
-    path: resolve("static/prd"),
-    filename: "[name].[contenthash:8].bundle.js",
-    publicPath: "/prd",
+    path: resolve('dist'),
+    filename: '[name].[contenthash:8].bundle.js',
+    publicPath: '/dist',
   },
   cache: {
-    type: "filesystem",
-    cacheDirectory: "/cachespace",
+    type: 'filesystem',
+    cacheDirectory: '/cachespace',
   },
   module: {
     rules: [
@@ -37,9 +37,9 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: [
-          "thread-loader",
+          'thread-loader',
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
           },
         ],
       },
@@ -49,10 +49,10 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "./",
+              publicPath: './',
             },
           },
-          "css-loader",
+          'css-loader',
         ],
       },
       {
@@ -61,11 +61,11 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "./",
+              publicPath: './',
             },
           },
-          "css-loader",
-          "sass-loader",
+          'css-loader',
+          'sass-loader',
         ],
       },
       {
@@ -74,18 +74,18 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "./",
+              publicPath: './',
             },
           },
-          "css-loader",
-          "less-loader",
+          'css-loader',
+          'less-loader',
         ],
       },
       {
         test: /\.(gif|jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/i,
         use: [
           {
-            loader: "url-loader",
+            loader: 'url-loader',
           },
         ],
       },
@@ -95,12 +95,12 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
     new CleanWebpackPlugin(),
     new CaseSensitivePathsPlugin(),
     new MiniCssExtractPlugin({
-      filename: "css/[name].[contenthash:8].css",
-      chunkFilename: "css/[id].[contenthash:8].css",
+      filename: 'css/[name].[contenthash:8].css',
+      chunkFilename: 'css/[id].[contenthash:8].css',
     }),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn/),
     new HtmlWebpackPlugin({
-      template: resolve("./static/index.html"),
+      template: resolve('./static/index.html'),
     }),
     // static files are not on CDN，need pre gzip
     new CompressionPlugin(),
@@ -121,6 +121,6 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
       new OptimizeCSSAssetsPlugin({}),
     ],
   },
-});
+})
 
-module.exports = prodWebpackConfig;
+module.exports = prodWebpackConfig
