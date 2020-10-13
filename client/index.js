@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import './index.css'
+import './index.scss'
 ReactDOM.render(
-  <div className="container">Project Test</div>,
+  <div className="container">Webpack config scaffolder</div>,
   document.getElementById('root'),
 )
